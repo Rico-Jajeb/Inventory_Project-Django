@@ -1,0 +1,85 @@
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+        <h1>add_item</h1>
+        {% if submitted %}
+            Your Item was Submitted
+        {% else %}
+            <form action=""  method="POST" class="ms-4 me-4  pb-3 ">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+
+                <div class="addMainItmBtn">
+                    <div class="btn btn-group">
+                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                        <span><a class="text-decoration-none" href="{% url 'cpu_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                    </div>
+                </div>
+
+            </form>
+        {% endif %}
+        <!-- <form>
+            <div class="d-flex justify-content-end">
+                <label class="pe-4" for="">Name/Model</label>
+                <input name="name_model"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+            </div>
+            <div class="d-flex justify-content-end">
+                <label class="pe-4" for="">Brand</label>
+                <input name="brand" type="text" class="itmInput" id="itmInput3 brand"   required>
+            </div>
+            <div class="d-flex justify-content-end">
+                <label class="pe-4" for="">Description</label>
+                <input name="descriptin" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+            </div> 
+            <div class="row">
+                <div class="col">                    
+                    <label class="pe-2" for="">Qty</label>
+                    <input name="quantity" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                </div>
+                <div class="col">
+                    <label class="pe-2" for="">Price</label>
+                    <input name="price" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                </div>
+            </div>   
+            <div class="addMainItmBtn">
+                <div class="btn btn-group">
+                    <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                    <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                    <span><a class="text-decoration-none" href="{% url 'cpu_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                </div>
+            </div>
+        </form> -->
+
+       
+        <script type="text/javascript">
+            $(document).on('submit', '#post_form', function(e){
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: 'insert_cpu_items',
+                    data: {
+                        name_model: $('input[name="name_model"]').val(),
+                        brand: $('input[name="brand"]').val(),
+                        descriptin: $('input[name="descriptin"]').val(),
+                        quantity: $('input[name="quantity"]').val(),
+                        price: $('input[name="price"]').val(),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    },
+        
+                    success: function(data){
+                        $('#save_notif').html(data).css('display','block');
+                    }
+                })
+            })
+        
+        </script>
+
+{% endblock %}        

@@ -1,0 +1,402 @@
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+
+
+<div class=" mt-5 mb-5">
+    <div class="box1 shadow ms-4 me-4  ">
+        <div class="box shadow">
+            <img class="dashboardIcon m-3" src="{% static 'img/sold-out.png' %}" alt="">
+        </div>
+
+        <div class="list">
+                <span class=" ">
+                        Out Stock Items
+                </span>
+        </div>
+
+     
+        <div class=" box2 ms-3 me-3  mb-1  pb-2 ">
+                <div class="" style="overflow-x: auto;">       
+                <table  class="table text-dark table-hover text-center"  '>
+                    <thead class="border-bottom ">
+                        {% if user.is_superuser %}
+                            <tr>
+                                    
+                                    <th scope="col">Name/Model</th>
+                                    <th scope="col">Brand</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">price</th>
+                                    <th scope="col">Action</th>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th scope="col">Name/Model</th>
+                                <th scope="col">Brand</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">price</th>
+                              
+                            </tr>
+                        {% endif %}
+                    </thead>
+
+                {% for item in out_of_stock_cpu %}
+                 
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0" href="{% url 'update_cpu_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a   href="{% url 'delete_cpu_items' item.id %}"   onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>     
+                  
+              
+                 
+
+
+                
+                {% endfor %}
+
+
+                <!--this is table for gpu items-->
+                {% for item in out_of_stock_gpu %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_gpu_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_gpu_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for motherboard items-->
+                {% for item in out_of_stock_mobo %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_mobo_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_mobo_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for ram items-->
+                {% for item in out_of_stock_ram %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_ram_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_ram_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for storage items-->
+                {% for item in out_of_stock_storage %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_storage_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_storage_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for keyboard items-->
+                {% for item in out_of_stock_keyboard %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_keyboard_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_keyboard_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for monitor items-->
+                {% for item in out_of_stock_monitor %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_monitor_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_monitor_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for mouse items-->
+                {% for item in out_of_stock_mouse %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_mouse_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_mouse_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for power supply items-->
+                {% for item in out_of_stock_psu %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_psu_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_psu_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for cpu cooler/fan items-->
+                {% for item in out_of_stock_cpu_fan %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_cpu_fan_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_cpu_fan_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for system unit case items-->
+                {% for item in out_of_stock_case %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_case_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_case_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for mousepad items-->
+                {% for item in out_of_stock_mousepad %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_mousepad_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_mousepad_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                <!--this is table for headphone items-->
+                {% for item in out_of_stock_headphone %}
+                    <tr>
+                        <td>{{ item.name_model }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.descriptin }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        {% if user.is_superuser %}
+                            <td>
+                                <span class='btn btn-success btnhover'>
+                                    <a class="bg-transparent border-0"  href="{% url 'update_headphone_items' item.id %}" >
+                                        <img class='actionIcon ' src="{% static 'img/edit.png' %}" alt=''>
+                                    </a>
+                                </span>
+                                <span class='btn btn-danger btnhover2'>
+                                    <a  href="{% url 'delete_headphone_items' item.id %}" onclick="return confirm('Do you want to continue Delete?')">
+                                        <img class='actionIcon ' src="{% static 'img/trash.png' %}" alt=''>
+                                    </a>
+                                </span>
+                            </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                    
+                </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+      
+
+{% endblock %}        

@@ -1,0 +1,63 @@
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+
+    {% if searched %}
+    
+
+        <div class=" mt-5 ">
+            <div class="box1 shadow ms-4 me-4 pb-1 ">
+                        <div class="box shadow">
+                            <img class="dashboardIcon m-3" src="{% static 'img/search2.png' %}" alt="">
+                        </div>
+
+                        <div class="list">
+                                <span class=" ">
+                                        You Search for {{searched}}
+                                </span>
+                        </div>
+            
+                        <div class="box2 ms-3 me-3  mb-1 ">
+                            <table class="table text-dark table-hover text-center ">
+                                <thead class="border-bottom ">
+                                        <tr>      
+                                                <th scope="col">Name/Model</th>
+                                                <th scope="col">Brand</th>
+                                            
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">price</th>     
+                                        </tr>
+                                </thead>
+                                    {% for item in item_search %}
+                                        <tr>
+                                            <td>
+                                                <a  class="text-decoration-none text-dark" href="{% url 'search_item_redirect' item.id %}">  {{ item }} </a> <br>
+                                            </td>
+                                            <td>
+                                                <a  class="text-decoration-none text-dark" href="{% url 'search_item_redirect' item.id %}">  {{ item.brand  }} </a> <br>
+                                            </td>
+                                            <td>
+                                                <a  class="text-decoration-none text-dark" href="{% url 'search_item_redirect' item.id %}">  {{ item.quantity  }} </a> <br>
+                                            </td>
+                                            <td>
+                                                <a  class="text-decoration-none text-dark" href="{% url 'search_item_redirect' item.id %}">  {{ item.price  }} </a> <br>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                            </table>
+
+                                {% if no_result_found %}     
+                                    <p class="text-center mb-4 pb-4">No result found!! </p>
+                                {% endif %}
+
+                        </div>
+            </div>
+        </div>
+    {% else %}
+        <h1 class="text-center text-dark mt-5 pt-5">Hey! you forgot to search something!!</h1>
+    {% endif %}
+   
+{% endblock %}

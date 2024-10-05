@@ -1,0 +1,56 @@
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+        <div class="">
+
+            <div class="settings shadow ">
+                <div class="">
+                    <h1 class=" text-center text-dark pt-4">Build Your Profile</h1>
+                    <p class=" text-center">This information will let us know more about you</p>
+                </div>
+
+                <div class="sett_option mt-4 ">
+                    {% if request.path == '/Dashboardabout' %}
+                        <span class="sett_bg"><a class="bg_about" href="{% url 'about' %}">About </a></span>
+                        <span class="sett_bg"><a class="profile_menu " href="{% url 'user_contact' %}">Contact</a></span>
+                        <span class="sett_bg"><a class="profile_menu " href="{% url 'address' %}">Address</a></span>
+                     
+                       
+                    {% elif request.path == '/Dashboarduser_contact' %}
+                    <span class="sett_bg"><a class=" profile_menu" href="{% url 'about' %}">About </a></span>
+                    <span class="sett_bg"><a class="bg_contact" href="{% url 'user_contact' %}">Contact</a></span>
+                    <span class="sett_bg"><a class="profile_menu" href="{% url 'address' %}">Address</a></span>
+               
+                    {% elif request.path == '/Dashboardaddress' %}
+                    <span class="sett_bg"><a class="profile_menu" href="{% url 'about' %}">About </a></span>
+                    <span class="sett_bg"><a class="profile_menu" href="{% url 'user_contact' %}">Contact</a></span>
+                    <span class="sett_bg"><a class="bg_address" href="{% url 'address' %}">Address</a></span>
+               
+                    {% else %}
+                    <span class="sett_bg"><a class="profile_menu" href="{% url 'about' %}">About </a></span>
+                    <span class="sett_bg"><a class="profile_menu" href="{% url 'user_contact' %}">Contact</a></span>
+                    <span class="sett_bg"><a class="profile_menu" href="{% url 'address' %}">Address</a></span>
+                 
+                    {% endif %}
+ 
+                </div>
+
+                <div class="row mt-4">
+                    {% block settings_content %}
+ 
+                    {% endblock %} 
+                </div>
+                
+
+
+            </div>
+
+        </div>
+{% endblock %}                   
+
+        
+
+        

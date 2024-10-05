@@ -1,0 +1,1205 @@
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+
+                         <!--Content for items -->
+                            <div class="   mb-5">
+                                <div class="mb-4"> 
+                                            <h3 class="category"><img class="ctgyImg" src="{% static 'img/category.gif' %}" alt=""> Category</h3>
+                        
+                                </div>  
+                                {{success}}
+                                <div class="row  ">
+                                          
+                    <!------------------------ Cpu Category -------------------------->
+                                                <div class="container-fluid col-xl-4 col-xxl-3 col-md-6 mb-4 mt-5">
+                                                    <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                        <div class="">
+                                                            <a class="hover-text"  href="{% url 'cpu_table' %}">
+                                                                {% if user.is_superuser %} 
+                                                                    <img class="itemImg ms-3" src="{% static 'img/cpu2.png' %}" alt="">
+                                                                {% else %}
+                                                                    <img class="itemImg2 ms-3" src="{% static 'img/cpu2.png' %}" alt="">
+                                                                {% endif %}
+                                                            </a>
+                                                        </div>
+                                                        <div class="itembtns">
+                                                            {% if user.is_superuser %} 
+                                                                <span class="itembtns2 "><button class="text-light  btnhover item_add_btn" href="" onclick="pop_modal()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                            {% else %}
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="itembtns3 ">
+                                                            {% if user.is_superuser %}
+                                                                <h4 class=" text-dark">CPU</h4>
+                                                            {% else %}
+                                                                <h4 class=" text-dark mt-4 pt-3">CPU</h4>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Item Modal-->
+                                                        <div class="popup_modal_container" id="modal1">
+                                                            <div class="popupModal" id="modal2" >
+                                                                <div class=" modal_form_cont shadow">
+                                                                    <!--begin-->
+                                                                        <div class="modal_box shadow">
+                                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                                        </div>
+                                                                        <div class="modal_box2 ">
+                                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                                        </div>
+                                                                        <div class="save_notif" id="save_notif">
+
+                                                                        </div>
+                                                                        <div class="modal_title">
+                                                                            
+                                                                            <span class=" h5">
+                                                                                    Add Item To Cpu
+                                                                                    
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="  ">
+                                                                            <form  id="post_form" class="ms-4 me-4  pb-3 ">
+                                                                                {% csrf_token %}
+                                                                              
+                                                                                <div class="d-flex justify-content-end">
+                                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                                    <input name="name_model"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                                </div>
+                                                                                <div class="d-flex justify-content-end">
+                                                                                    <label class="pe-4" for="">Brand</label>
+                                                                                    <input name="brand" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                                </div>
+                                                                                <div class="d-flex justify-content-end">
+                                                                                    <label class="pe-4" for="">Description</label>
+                                                                                    <input name="descriptin" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                                </div> 
+                                                                                <div class="row">
+                                                                                    <div class="col">                    
+                                                                                        <label class="pe-2" for="">Qty</label>
+                                                                                        <input name="quantity" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                                    </div>
+                                                                                    <div class="col">
+                                                                                        <label class="pe-2" for="">Price</label>
+                                                                                        <input name="price" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                                    </div>
+                                                                                </div>   
+                                                                                <div class="addMainItmBtn">
+                                                                                    <div class="btn btn-group">
+                                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                                        <span><a class="text-decoration-none" href="{% url 'cpu_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                      
+                                                                        </div>
+                                                                    <!--end--> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                <!-- end item modal-->
+                                                <!-- end cpu Category-->
+
+                    <!------------------------ Graphics card Category -->
+                                            <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                                <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                    <div class="">
+                                                        <a class="hover-text" href="{% url 'gpu_table' %}">
+                                                            {% if user.is_superuser %}
+                                                                <img class="itemImg ms-3" src="{% static 'img/gpu.png' %}" alt="">
+                                                            {% else %}
+                                                                <img class="itemImg2 ms-3" src="{% static 'img/gpu.png' %}" alt="">
+                                                            {% endif %}
+                                                        </a>
+                                                    </div>
+                                                    
+                                                    <div class="itembtns">
+                                                        {% if user.is_superuser %} 
+                                                        <span class="itembtns2 "><button class="text-light  btnhover item_add_btn" onclick="pop_modal2()" href=""><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                        {% else %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="itembtns3 ">
+                                                        {% if user.is_superuser %}
+                                                            <h4 class=" text-dark">Graphics card</h4>
+                                                        {% else %}
+                                                            <h4 class="mt-4 pt-3 text-dark">Graphics card</h4>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <!--Item Modal-->
+                                                <div class="popup_modal_container" id="modal3">
+                                                    <div class="popupModal" id="modal4" >
+                                                        <div class=" modal_form_cont shadow">
+                                                            <!--begin-->
+                                                                <div class="modal_box shadow">
+                                                                    <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                                </div>
+                                                                <div class="modal_box2">
+                                                                        <button class="modal_close_btn" href="" onclick="close_pop_modal2()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                                </div>
+                                                                <div class="save_notif" id="save_notif2">
+
+                                                                </div>
+                                                                <div class="modal_title">
+                                                                    <span class=" h5">
+                                                                            Add Item To Graphics card
+                                                                    </span>
+                                                                </div>
+                                                                <div class="  ">
+                                                                    <form  id="post_form2" class="ms-4 me-4  pb-3 ">
+                                                                        {% csrf_token %}
+                                                                        
+                                                                        <div class="d-flex justify-content-end">
+
+                                                                            <label class="pe-4" for="">Name/Model</label>
+                                                                            <input name="name_model2"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                        </div>
+                                                                        <div class="d-flex justify-content-end">
+                                                                            <label class="pe-4" for="">Brand</label>
+                                                                            <input name="brand2" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                        </div>
+                                                                        <div class="d-flex justify-content-end">
+                                                                            <label class="pe-4" for="">Description</label>
+                                                                            <input name="descriptin2" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                        </div> 
+                                                                        <div class="row">
+                                                                            <div class="col">                    
+                                                                                <label class="pe-2" for="">Qty</label>
+                                                                                <input name="quantity2" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label class="pe-2" for="">Price</label>
+                                                                                <input name="price2" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                            </div>
+                                                                        </div>   
+                                                                        <div class="addMainItmBtn">
+                                                                            <div class="btn btn-group">
+                                                                                <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                                <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                                <span><a class="text-decoration-none" href="{% url 'gpu_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            <!--end--> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <!--end item modal-->
+
+
+                    <!------------------------ Motherboard Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'mobo_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/mobo2.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/mobo2.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %}
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal3()" ><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Motherboard</h4>
+                                                    {% else %}  
+                                                        <h4 class="mt-4 pt-3 text-dark">Motherboard</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                            <div class="popup_modal_container" id="modal5">
+                                                <div class="popupModal" id="modal6" >
+                                                    <div class=" modal_form_cont shadow">
+                                                        <!--begin-->
+                                                            <div class="modal_box shadow">
+                                                                <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                            </div>
+                                                            <div class="modal_box2">
+                                                                    <button class="modal_close_btn" href="" onclick="close_pop_modal3()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                            </div>
+                                                            <div class="save_notif" id="save_notif3">
+
+                                                            </div>
+                                                            <div class="modal_title">
+                                                                <span class=" h5">
+                                                                        Add Item To Motherboard
+                                                                </span>
+                                                            </div>
+                                                            <div class="  ">
+                                                                <form  id="post_form3" class="ms-4 me-4  pb-3 ">
+                                                                    {% csrf_token %}
+                                                                    
+                                                                    <div class="d-flex justify-content-end">
+
+                                                                        <label class="pe-4" for="">Name/Model</label>
+                                                                        <input name="name_model3"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <label class="pe-4" for="">Brand</label>
+                                                                        <input name="brand3" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <label class="pe-4" for="">Description</label>
+                                                                        <input name="descriptin3" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                    </div> 
+                                                                    <div class="row">
+                                                                        <div class="col">                    
+                                                                            <label class="pe-2" for="">Qty</label>
+                                                                            <input name="quantity3" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="pe-2" for="">Price</label>
+                                                                            <input name="price3" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                        </div>
+                                                                    </div>   
+                                                                    <div class="addMainItmBtn">
+                                                                        <div class="btn btn-group">
+                                                                            <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                            <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                            <span><a class="text-decoration-none" href="{% url 'mobo_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        <!--end--> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!--end item modal-->
+
+                    <!------------------------Ram Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'ram_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static  'img/ram.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static  'img/ram.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %}
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal4()" ><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">RAM</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">RAM</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                            <div class="popup_modal_container" id="modal7">
+                                                <div class="popupModal" id="modal8" >
+                                                    <div class=" modal_form_cont shadow">
+                                                        <!--begin-->
+                                                            <div class="modal_box shadow">
+                                                                <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                            </div>
+                                                            <div class="modal_box2">
+                                                                    <button class="modal_close_btn" href="" onclick="close_pop_modal4()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                            </div>
+                                                            <div class="save_notif" id="save_notif4">
+
+                                                            </div>
+                                                            <div class="modal_title">
+                                                                <span class=" h5">
+                                                                        Add Item To RAM
+                                                                </span>
+                                                            </div>
+                                                            <div class="  ">
+                                                                <form  id="post_form4" class="ms-4 me-4  pb-3 ">
+                                                                    {% csrf_token %}
+                                                                    
+                                                                    <div class="d-flex justify-content-end">
+
+                                                                        <label class="pe-4" for="">Name/Model</label>
+                                                                        <input name="name_model4"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <label class="pe-4" for="">Brand</label>
+                                                                        <input name="brand4" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <label class="pe-4" for="">Description</label>
+                                                                        <input name="descriptin4" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                    </div> 
+                                                                    <div class="row">
+                                                                        <div class="col">                    
+                                                                            <label class="pe-2" for="">Qty</label>
+                                                                            <input name="quantity4" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="pe-2" for="">Price</label>
+                                                                            <input name="price4" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                        </div>
+                                                                    </div>   
+                                                                    <div class="addMainItmBtn">
+                                                                        <div class="btn btn-group">
+                                                                            <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                            <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                            <span><a class="text-decoration-none" href="{% url 'ram_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        <!--end--> 
+                                                    </div>
+                                        </div>
+                                    </div>
+                                <!--end item modal-->
+
+                    <!------------------------ Storage Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'storage_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/storage3.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/storage3.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %} 
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal5()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Storage</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">Storage</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal9">
+                                            <div class="popupModal" id="modal10" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal5()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif5">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To Storage
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form5" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model5"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand5" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin5" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity5" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price5" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'storage_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <!--end item modal-->
+                    <!------------------------ Keyboard Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'keyboard_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/keyboard.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/keyboard.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %}
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal6()" ><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Keyboard</h4>
+                                                    {% else %}
+                                                        <h4 class=" mt-4 pt-3 text-dark">Keyboard</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal11">
+                                            <div class="popupModal" id="modal12" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal6()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif6">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To Keyboard
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form6" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model6"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand6" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin6" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity6" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price6" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'keyboard_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end item modal-->
+
+                    <!------------------------ Monitor Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'monitor_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/monitor.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/monitor.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %} 
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal7()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Monitor</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">Monitor</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal13">
+                                            <div class="popupModal" id="modal14" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal7()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif7">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To Monitor
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form7" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model7"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand7" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin7" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity7" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price7" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'monitor_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end item modal-->
+                                       
+                             
+                    <!------------------------Mouse Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'mouse_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/mouse.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/mouse.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %}
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal8()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Mouse</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">Mouse</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal15">
+                                            <div class="popupModal" id="modal16" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal8()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif8">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To Mouse
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form8" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model8"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand8" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin8" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity8" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price8" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'mouse_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end item modal-->
+                    <!------------------------ Power Supply Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'psu_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/psu.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/psu.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %} 
+                                                        <span class="itembtns2"><button class="text-light item_add_btn btnhover" onclick="pop_modal9()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Power Supply</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">Power Supply</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal17">
+                                            <div class="popupModal" id="modal18" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal9()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif9">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To Power Supply
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form9" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model9"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand9" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin9" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity9" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price9" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'psu_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end item modal-->
+                               
+                    <!------------------------ Cpu cooler fan Category -->
+                                        <div class="container-fluid col-md-4 col-xxl-3  mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'cpu_fan_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/cpuCooler.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/cpuCooler.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %} 
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal10()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Cpu cooler/Fan</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">Cpu cooler/Fan</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal19">
+                                            <div class="popupModal" id="modal20" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal10()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif10">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To Cpu cooler/fan
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form10" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model10"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand10" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin10" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity10" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price10" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'cpu_fan_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end item modal-->
+                    <!------------------------ Case Category -->
+                                        <div class="container-fluid col-md-4 col-xxl-3  mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'case_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/case.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/case.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %} 
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal11()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Case</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">Case</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal21">
+                                            <div class="popupModal" id="modal22" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal11()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif11">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To System unit case
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form11" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model11"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand11" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin11" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity11" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price11" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'case_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end item modal-->
+                    <!------------------------ Mousepad Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'mousepad_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/mousepad.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/mousepad.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %} 
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal12()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Mousepad</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">Mousepad</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal23">
+                                            <div class="popupModal" id="modal24" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal12()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif12">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To Mousepad
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form12" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model12"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand12" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin12" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity12" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price12" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'mousepad_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end item modal-->
+                    <!------------------------ headphone Category -->
+                                        <div class="container-fluid col-xl-4 col-xxl-3  col-md-6 mb-4 mt-5">
+                                            <div class="m-auto bg-darks cards mt-2 mb-2 shadow ">
+                                                <div class="">
+                                                    <a class="hover-text" href="{% url 'headphone_table' %}">
+                                                        {% if user.is_superuser %} 
+                                                            <img class="itemImg ms-3" src="{% static 'img/headphone.png' %}" alt="">
+                                                        {% else %}
+                                                            <img class="itemImg2 ms-3" src="{% static 'img/headphone.png' %}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="itembtns">
+                                                    {% if user.is_superuser %}
+                                                        <span class="itembtns2 "><button class="text-light item_add_btn btnhover" onclick="pop_modal13()"><img class=" plus_img" src="{% static 'img/plus5.gif' %}" alt=""></button></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="itembtns3 ">
+                                                    {% if user.is_superuser %}
+                                                        <h4 class=" text-dark">Head phone</h4>
+                                                    {% else %}
+                                                        <h4 class="mt-4 pt-3 text-dark">Head phone</h4>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Item Modal-->
+                                        <div class="popup_modal_container" id="modal25">
+                                            <div class="popupModal" id="modal26" >
+                                                <div class=" modal_form_cont shadow">
+                                                    <!--begin-->
+                                                        <div class="modal_box shadow">
+                                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                                        </div>
+                                                        <div class="modal_box2">
+                                                                <button class="modal_close_btn" href="" onclick="close_pop_modal13()"><img class="closeIcon" src="{% static 'img/close.gif' %}" alt=""></button>
+                                                        </div>
+                                                        <div class="save_notif" id="save_notif13">
+
+                                                        </div>
+                                                        <div class="modal_title">
+                                                            <span class=" h5">
+                                                                    Add Item To Headphone
+                                                            </span>
+                                                        </div>
+                                                        <div class="  ">
+                                                            <form  id="post_form13" class="ms-4 me-4  pb-3 ">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="d-flex justify-content-end">
+
+                                                                    <label class="pe-4" for="">Name/Model</label>
+                                                                    <input name="name_model13"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Brand</label>
+                                                                    <input name="brand13" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <label class="pe-4" for="">Description</label>
+                                                                    <input name="descriptin13" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col">                    
+                                                                        <label class="pe-2" for="">Qty</label>
+                                                                        <input name="quantity13" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <label class="pe-2" for="">Price</label>
+                                                                        <input name="price13" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                                    </div>
+                                                                </div>   
+                                                                <div class="addMainItmBtn">
+                                                                    <div class="btn btn-group">
+                                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                                        <span><a class="text-decoration-none" href="{% url 'headphone_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    <!--end--> 
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!--end item modal-->
+                            
+                                </div>
+                            </div>
+                        <!--end content for items -->
+
+
+
+
+                  
+
+                        <!-- <script type="text/javascript">
+                            $(document).on('submit', '#post_form', function(e){
+                                e.preventDefault();
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'insert_cpu_items',
+                                    data:{
+                                        name_model: $('name_model').val(),
+                                        brand: $('brand').val(),
+                                        descriptin: $('descriptin').val(),
+                                        quantity: $('quantity').val(),
+                                        price: $('price').val(),
+                                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                                    },
+                                    success: function(data){
+                                        
+                                    }
+                                })
+                            })
+
+                        </script> -->
+    {% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+
+
+       
+     
+        {% if submitted %}
+            Your Item was Submitted
+        {% else %}
+
+
+           <div class=" modal_form_cont shadow">
+                    <!--begin-->
+                        <div class="modal_box shadow">
+                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                        </div>
+                       
+                        <div class="" id="save_notif">
+
+                        </div>
+                        <div class="modal_title ">
+                            
+                            <span class=" h5">
+                                    Update Transaction Ref no. {{ transac_ref }}
+                                    
+                            </span>
+                        </div>
+                        <div class="  ">
+                            <form action=""  method="POST" class="ms-4 me-4  pb-1 ">
+                                {% csrf_token %}
+                                
+                                {{ form.as_p }}
+
+                                <div class="addMainItmBtn">
+                                    <div class="btn btn-group update_btn ">
+                                        <span><div><input  class="update_save_btn " type="submit" value="save" ></div></span>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+           </div>
+        {% endif %}
+     
+
+      
+
+{% endblock %}        

@@ -1,0 +1,50 @@
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+
+
+         
+    {% if submitted %}
+        Send successfully
+    {% else %}
+
+
+
+   <div class=" modal_form_cont2 shadow">
+            <div class="  ">
+
+                <div class="contact_head">
+                    <div class="modal_box3  ">
+                        <a class="modal_close_btn" href="{% url 'supplier_table' %}" ><img class="closeIcon" src="{% static 'img/close.png' %}" alt=""></a>
+                    </div>  
+                    <div class="contct mb-2">
+                        <h5 class="ps-4 pt-4 text-light">Contact Us</h5>
+                        <p class="ps-4 pb-2 mb-4 text-light">Please fill this form in a decent manner</p>                           
+                    </div>                  
+                 
+
+                </div>
+
+                <form action=""  method="POST" class="ms-4 me-4  mt-4 pb-1 ">
+                    {% csrf_token %}
+                    
+                    {{ form.as_div }}
+                    
+                    <label for="">Message</label>
+                    <input class="form-control mb-3" type="text" name="" id="msg" placeholder="Enter your message here ">
+
+                    <div class="addMainItmBtn ">
+                        <div class="btn btn-group update_btn pt-4 ">
+                            <span><div><input  class="update_save_btn " type="submit" value="Send" ></div></span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+   </div>
+{% endif %}
+
+{% endblock %}     

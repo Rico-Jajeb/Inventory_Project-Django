@@ -1,0 +1,675 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--Chart JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.0/chart.min.js" integrity="sha512-qKyIokLnyh6oSnWsc5h21uwMAQtljqMZZT17CIMXuCQNIfFSFF4tJdMOaJHL9fQdJUANid6OB6DRR0zdHrbWAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>Inventory System</title>
+</head>
+<body>
+    <!--Main Container-->
+    <div class="container-fluid row text-light m-0 p-0 main1">
+        <!--Left Side Bar-->
+        <div id="ToResizeLeftSidebar" class="leftSideBarMainBg col-sm-2 container-fluid  row p-0 m-0 overflow-auto  d-none d-sm-block " style="background-image:url({% static 'img/pc1.jpg' %}); background-position:center; background-size:100% 100%; background-repeat: no-repeat; "  >
+        <!-- <div id="ToResizeLeftSidebar" class="leftSideBarMainBg col-sm-2 container-fluid  row p-0 m-0 overflow-auto  d-none d-sm-block"    > -->
+            <div class="leftSideBar " >
+                    <div class="logo  border-bottom pt-3 pb-3 mt-4 text-sm-center">
+                        <div><img class="logo2" src="{% static 'img/log.png' %}" alt=""></div>
+                        <span class="systemTitle ps-3 hideit" id="hide">Inventory System</span>
+                    </div>
+            
+                    <div class="profile  border-bottom  pt-3 pb-3  mt-3 mb-3 text-sm-start  ">
+                        {% if request.path == '/Dashboardabout' %}
+                            <div class="userName buttonHover bwidth25"  onclick="UdropDown()"  style="background-color:  #e91e62fb; border-radius: 5px;">
+                        {% elif request.path == '/Dashboarduser_contact' %}
+                            <div class="userName buttonHover bwidth25"  onclick="UdropDown()" style="background-color:  #e91e62fb; border-radius: 5px;">
+                        {% elif request.path == '/Dashboardaddress' %}
+                            <div class="userName buttonHover bwidth25"  onclick="UdropDown()" style="background-color:  #e91e62fb; border-radius: 5px;">
+                        {% else %}
+                            <div class="userName buttonHover bwidth25"  onclick="UdropDown()">
+                        {% endif %}
+                            <span class="dropdown-toggle">  <img class="dashboardIcon"  src="{% static 'img/man.png' %}" alt="" onclick="UdropDown3()"> <span class="ps-3 hideit" id="hide1">{{user}}</span>  </span>
+
+                        </div>
+                        <div class="userDropdownOff" id="userDropDown">
+                            <div class=" text-light  mt-3">
+                                {% if request.path == '/Dashboardsettings' %}
+                                <a href="{% url 'about' %}" class=" buttonHover bwidth mb-2 text-decoration-none "  type="submit" name="dashboard"  style="background-color:  #e91e62fb; border-radius: 5px;" >
+                                {% else %}
+                                <a href="{% url 'about' %}" class=" buttonHover bwidth mb-2 text-decoration-none "  type="submit" name="dashboard"  >
+                                {% endif %}
+                                    
+                                    <div class="iconM ps-4 mt-2 mb-2">
+                                        <span><img class="dashboardIcon" src="{% static 'img/settings1.gif' %}" alt=""></span>
+                                        <span class="ps-3 text-light hideit" id="hide8">settings</span>
+                                    </div>
+                                </a>
+
+                                <a href="{% url 'logout_user' %}" class=" buttonHover bwidth mb-2 text-decoration-none "  type="submit" name="dashboard" >
+                                    <div class="iconM ps-4 mt-2 mb-2">
+                                        <span><img class="dashboardIcon" src="{% static 'img/logout.png' %}" alt=""></span>
+                                        <span class="ps-3 text-light hideit" id="hide9">Logout</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                        <form action="" method="POST">
+
+                            
+                            {% if request.path == '/Dashboarddashboard' %}
+                                <a href="{% url 'dashboard' %}" class=" buttonHover bwidth  text-decoration-none "  type="submit" name="dashboard" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardout_of_stock_result' %}
+                                <a href="{% url 'dashboard' %}" class=" buttonHover bwidth  text-decoration-none "  type="submit" name="dashboard" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardlow_of_stock_result' %}
+                                <a href="{% url 'dashboard' %}" class=" buttonHover bwidth  text-decoration-none "  type="submit" name="dashboard" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardsearch' %}
+                                <a href="{% url 'dashboard' %}" class=" buttonHover bwidth  text-decoration-none "  type="submit" name="dashboard" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% else %}
+                                <a href="{% url 'dashboard' %}" class=" buttonHover bwidth  text-decoration-none "  type="submit" name="dashboard" >
+                            {% endif %}
+                                <div class="iconM ps-2 mt-2 mb-2"  >
+                                    <span class="iconP3 ps-1"><img class="dashboardIcon3" src="{% static 'img/dashboard2.gif' %}" alt=""></span>
+                                    <span class="text-light  ps-4 hideit" id="hide2">Dashboard</span>
+                                </div>
+                            </a>
+                            <!--this is for the bg-->
+                            {% if request.path == '/Dashboardallitems' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardcpu_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardgpu_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardmobo_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardram_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardstorage_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardkeyboard_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardmonitor_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardmouse_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardpsu_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardcpu_fan_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardcase_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardmousepad_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% elif request.path == '/Dashboardheadphone_table' %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% else %}
+                                <a href="{% url 'allitems' %}" class=" buttonHover bwidth  text-decoration-none" type="submit" name="items">  
+                            {% endif %} 
+                                <div class="iconM ps-3 mt-2 mb-2">
+                                    <span class=" iconP3 "><img class="dashboardIcon" src="{% static 'img/boxes2.png' %}" alt=""></span>
+                                    <span class="text-light ps-4 hideit" id="hide3">Items</span>
+                                </div>
+                            </a>
+
+                            {% if request.path == '/Dashboardtransaction_table' %}
+                                <a href="{% url 'transaction_table' %}" class="buttonHover bwidth  text-decoration-none" type="submit" name="transaction" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% else %}
+                                <a href="{% url 'transaction_table' %}" class="buttonHover bwidth  text-decoration-none" type="submit" name="transaction">
+                            {% endif %}
+                                <div class="iconM ps-3 mt-2 mb-2">
+                                    <span class=" iconP3"><img class="dashboardIcon4" src="{% static 'img/transaction2.gif' %}" alt=""></span>
+                                    <span class="text-light ps-3 hideit" id="hide4">Transaction</span>
+                                </div>
+                            </a>
+
+                            {% if request.path == '/Dashboarddefective_table' %}
+                                <a href="{% url 'defective_table' %}" class="buttonHover bwidth  text-decoration-none" type="submit" name="defective" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% else %}
+                                <a href="{% url 'defective_table' %}" class="buttonHover bwidth  text-decoration-none" type="submit" name="defective" >
+                            {% endif %}
+                                <div class="iconM ps-3 mt-2 mb-2">
+                                    <span class=""><img class="dashboardIcon" src="{% static 'img/defect2.png' %}" alt=""></span>
+                                    <span class="text-light  ps-4 hideit" id="hide5">Defective</span>
+                                </div >
+                              
+                            </a>
+
+                            {% if request.path == '/Dashboardsupplier_table' %}
+                                <a href="{% url 'supplier_table' %}" class="buttonHover bwidth  text-decoration-none" type="submit" name="supplier" style="background-color:  #e91e62fb; border-radius: 5px;">
+                            {% else %} 
+                                <a href="{% url 'supplier_table' %}" class="buttonHover bwidth  text-decoration-none" type="submit" name="supplier" >
+                            {% endif %}
+                                <div class="iconM ps-3 mt-2 mb-2 "   class="{{ background_class }}">
+                                    <span class=""><img class="dashboardIcon4" src="{% static 'img/supplier2.png' %}" alt=""></span>
+                                    <span class="text-light  ps-3 hideit" id="hide6">Supplier</span>
+                                    
+                                </div> 
+                            </a>
+                        </form>
+            </div>
+        </div>
+        <!--end of Left Sidebar-->
+
+        <!--Nav Bar-->
+        <div class="main col-sm-10 text-dark overflow-auto" id="toResizeMainContent" >  
+                <div class="container-fluid d-flex justify-content-between pt-4">
+                    <!--To minimize the screen-->
+                        <div class=" ">
+                            <div class=" dt1" >
+                                <!-- <span class="" onclick="buttonToResizeLeftSidebar()"><img class="dashboardIcon2" src="<?php echo base_url('assets/img/more.png') ?>" alt="search"></span> -->
+                                <img class="dashboardIcon2 dotimg" src="{% static 'img/more.png' %}" alt="search">
+                            </div>
+                            <div class=" dt2 ">
+                                <div class=" " >
+                                            <h5>
+                                               
+                                                
+                                                {% if request.path == '/Dashboarddashboard' %}
+                                                    <p>Dashboard</p>
+                                                {% elif request.path == '/Dashboardallitems' %}
+                                                    <p>All Items</p>
+                                                {% elif request.path == '/Dashboardtransaction_table' %}
+                                                    <p>Transaction</p>
+                                                {% elif request.path == '/Dashboarddefective_table' %}
+                                                    <p>Defective</p>
+                                                {% elif request.path == '/Dashboardsupplier_table' %}
+                                                    <p>Supplier</p>
+                                                {% elif request.path == '/Dashboardout_of_stock_result' %}
+                                                    <p>Out of Stock</p>
+                                                {% elif request.path == '/Dashboardout_of_stock_result' %}
+                                                    <p>Out of Stock</p>
+                                                {% elif request.path == '/Dashboardlow_of_stock_result' %}
+                                                    <p>Low of Stock</p>
+                                                {% elif request.path == '/Dashboardcpu_table' %}
+                                                    <p>Cpu</p>
+                                                {% elif request.path == '/Dashboardgpu_table' %}
+                                                    <p>Graphics Card </p>
+                                                {% elif request.path == '/Dashboardmobo_table' %}
+                                                    <p>Motherboard</p>
+                                                {% elif request.path == '/Dashboardram_table' %}
+                                                    <p>Ram</p>
+                                                {% elif request.path == '/Dashboardstorage_table' %}
+                                                    <p>Storage</p>
+                                                {% elif request.path == '/Dashboardkeyboard_table' %}
+                                                    <p>Keyboard</p>
+                                                {% elif request.path == '/Dashboardmonitor_table' %}
+                                                    <p>Monitor</p>
+                                                {% elif request.path == '/Dashboardmouse_table' %}
+                                                    <p>Mouse</p>
+                                                {% elif request.path == '/Dashboardpsu_table' %}
+                                                    <p>Power Supply</p>
+                                                {% elif request.path == '/Dashboardcpu_fan_table' %}
+                                                    <p>Cpu Cooler/Fan</p>
+                                                {% elif request.path == '/Dashboardcase_table' %}
+                                                    <p>System Unit Case</p>
+                                                {% elif request.path == '/Dashboardmousepad_table' %}
+                                                    <p>Mousepad</p>
+                                                {% elif request.path == '/Dashboardheadphone_table' %}
+                                                    <p>Headphone</p>
+                                                {% elif request.path == '/Dashboardsearch' %}
+                                                    <p>Search</p>
+                                                {% elif request.path == '/Dashboardsettings' %}
+                                                    <p>Settings</p>
+                                                {% elif request.path == '/Dashboardabout' %}
+                                                    <p>Settings</p>
+                                                {% elif request.path == '/Dashboarduser_contact' %}
+                                                    <p>Settings</p>
+                                                {% elif request.path == '/Dashboardaddress' %}
+                                                    <p>Settings</p>
+                                                {% else %} 
+                                                    <h5>Update</h5>
+                                                {% endif %}
+                                            </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <!--For the search bar and notif-->
+                        <div class="">
+                            <form  action="{% url 'search' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="d-none d-sm-block pt-2">
+                                    <input class="searchbar" id="searchbar" type="search" name="searched" placeholder="  Search">
+                                    <span class="ps-0"> <button type="submit" class="bg-transparent border-0"><img class="navBarIcon" src="{% static 'img/search.gif' %}" alt="search"></button></span>
+                                    <span class="ps-3 text-decoration-none ">
+                                        <a class="link_decoration pt-1 " href="">
+                                                <i class="fa fa-bell bell " style="font-size:26px;color:black"></i>
+                                            <span class="pending text-dark" ><b>&nbsp;1&nbsp;</b></span>
+                                        </a>                                        
+                                    </span>
+                                </div> 
+                            </form>                            
+                        </div>
+                        <!--For the humberger when screen is small-->
+                        <div class="d-block d-sm-none ">
+                            <h2>
+                                <div class="navbar">
+                                    <div class="hamburger " onclick="toggleMenu()">
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                            </h2>
+                            <div class="off-canvas off_canvas_nav bg-dark  " id="offCanvasMenu">
+                                    <div class="ps-5 ms-5 pt5 mt-5 ">
+                                        <a  href="{% url 'dashboard' %}" class="off-canvas-link text-light"> 
+                                            <span class="iconP3 ps-2 pe-2 "><img class="dashboardIcon3" src="{% static 'img/dashboard2.gif' %}" alt=""></span>
+                                            Dashboard
+                                        </a>
+                                        <a href="{% url 'allitems' %}" class="off-canvas-link text-light">
+                                            <span class=" iconP3 pe-2 "><img class="dashboardIcon" src="{% static 'img/boxes2.png' %}" alt=""></span>
+                                            Items
+                                        </a>
+                                        <a href="{% url 'transaction_table' %}" class="off-canvas-link text-light">
+                                            <span class=" iconP3 pe-2 "><img class="dashboardIcon4" src="{% static 'img/transaction3.png' %}" alt=""></span>
+                                            Transaction
+                                        </a>
+                                        <a href="{% url 'defective_table' %}" class="off-canvas-link text-light">
+                                            <span class="iconP3 pe-2 "><img class="dashboardIcon" src="{% static 'img/defect2.png' %}" alt=""></span>
+                                            Defective
+                                        </a>
+                                        <a href="{% url 'supplier_table' %}" class="off-canvas-link text-light">
+                                            <span class="iconP3 pe-2"><img class="dashboardIcon" src="{% static 'img/supplier2.png' %}" alt=""></span>
+                                            Supplier
+                                        </a>
+                                        <a href="{% url 'logout_user' %}" class="off-canvas-link mt-5 text-light">
+                                            <span class="iconP3 pe-2"><img class="dashboardIcon" src="{% static 'img/logout.png' %}" alt=""></span>
+                                            logout
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--Content-->
+                    <div class="">
+                        {% block content %}
+                          
+                        {% endblock %}
+                    </div>
+        </div>
+        <!--end of Nav Bar-->
+        
+    </div>
+    <!--end of main container-->
+
+  
+
+</body>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+
+
+<script type="text/javascript">
+
+    //-------------------------------------------- items section -----------------------
+        //---This is for cpu form
+    $(document).on('submit', '#post_form', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_cpu_items',
+            data: {
+                name_model: $('input[name="name_model"]').val(),
+                brand: $('input[name="brand"]').val(),
+                descriptin: $('input[name="descriptin"]').val(),
+                quantity: $('input[name="quantity"]').val(),
+                price: $('input[name="price"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif').html(data).css('display','block');
+            }
+        })
+    })
+
+    //---This is for gpu form
+    $(document).on('submit', '#post_form2', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_gpu_items',
+            data: {
+                name_model: $('input[name="name_model2"]').val(),
+                brand: $('input[name="brand2"]').val(),
+                descriptin: $('input[name="descriptin2"]').val(),
+                quantity: $('input[name="quantity2"]').val(),
+                price: $('input[name="price2"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif2').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for motherboard form
+    $(document).on('submit', '#post_form3', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_mobo_items',
+            data: {
+                name_model: $('input[name="name_model3"]').val(),
+                brand: $('input[name="brand3"]').val(),
+                descriptin: $('input[name="descriptin3"]').val(),
+                quantity: $('input[name="quantity3"]').val(),
+                price: $('input[name="price3"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif3').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for Ram form
+    $(document).on('submit', '#post_form4', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_ram_items',
+            data: {
+                name_model: $('input[name="name_model4"]').val(),
+                brand: $('input[name="brand4"]').val(),
+                descriptin: $('input[name="descriptin4"]').val(),
+                quantity: $('input[name="quantity4"]').val(),
+                price: $('input[name="price4"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif4').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for Storage form
+    $(document).on('submit', '#post_form5', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_storage_items',
+            data: {
+                name_model: $('input[name="name_model5"]').val(),
+                brand: $('input[name="brand5"]').val(),
+                descriptin: $('input[name="descriptin5"]').val(),
+                quantity: $('input[name="quantity5"]').val(),
+                price: $('input[name="price5"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif5').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for keyboard form
+    $(document).on('submit', '#post_form6', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_keyboard_items',
+            data: {
+                name_model: $('input[name="name_model6"]').val(),
+                brand: $('input[name="brand6"]').val(),
+                descriptin: $('input[name="descriptin6"]').val(),
+                quantity: $('input[name="quantity6"]').val(),
+                price: $('input[name="price6"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif6').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for monitor form
+    $(document).on('submit', '#post_form7', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_monitor_items',
+            data: {
+                name_model: $('input[name="name_model7"]').val(),
+                brand: $('input[name="brand7"]').val(),
+                descriptin: $('input[name="descriptin7"]').val(),
+                quantity: $('input[name="quantity7"]').val(),
+                price: $('input[name="price7"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif7').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for mouse form
+    $(document).on('submit', '#post_form8', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_mouse_items',
+            data: {
+                name_model: $('input[name="name_model8"]').val(),
+                brand: $('input[name="brand8"]').val(),
+                descriptin: $('input[name="descriptin8"]').val(),
+                quantity: $('input[name="quantity8"]').val(),
+                price: $('input[name="price8"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif8').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for power supply form
+    $(document).on('submit', '#post_form9', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_psu_items',
+            data: {
+                name_model: $('input[name="name_model9"]').val(),
+                brand: $('input[name="brand9"]').val(),
+                descriptin: $('input[name="descriptin9"]').val(),
+                quantity: $('input[name="quantity9"]').val(),
+                price: $('input[name="price9"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif9').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for cpu cooler/fan form
+    $(document).on('submit', '#post_form10', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_cpu_fan_items',
+            data: {
+                name_model: $('input[name="name_model10"]').val(),
+                brand: $('input[name="brand10"]').val(),
+                descriptin: $('input[name="descriptin10"]').val(),
+                quantity: $('input[name="quantity10"]').val(),
+                price: $('input[name="price10"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif10').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for system unit case form
+    $(document).on('submit', '#post_form11', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_case_items',
+            data: {
+                name_model: $('input[name="name_model11"]').val(),
+                brand: $('input[name="brand11"]').val(),
+                descriptin: $('input[name="descriptin11"]').val(),
+                quantity: $('input[name="quantity11"]').val(),
+                price: $('input[name="price11"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif11').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for mousepad form
+    $(document).on('submit', '#post_form12', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_mousepad_items',
+            data: {
+                name_model: $('input[name="name_model12"]').val(),
+                brand: $('input[name="brand12"]').val(),
+                descriptin: $('input[name="descriptin12"]').val(),
+                quantity: $('input[name="quantity12"]').val(),
+                price: $('input[name="price12"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif12').html(data).css('display','block');
+            }
+        })
+    })
+
+        //---This is for headphone form
+    $(document).on('submit', '#post_form13', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_headphone_items',
+            data: {
+                name_model: $('input[name="name_model13"]').val(),
+                brand: $('input[name="brand13"]').val(),
+                descriptin: $('input[name="descriptin13"]').val(),
+                quantity: $('input[name="quantity13"]').val(),
+                price: $('input[name="price13"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif13').html(data).css('display','block');
+            }
+        })
+    })
+
+
+    //-------------------------------------------- Transaction section -----------------------
+        //---This is for transactions form
+    $(document).on('submit', '#post_form14', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_transaction',
+            data: {
+                transac_date: $('input[name="transac_date"]').val(),
+                unit: $('input[name="unit"]').val(),
+                total_cost: $('input[name="total_cost"]').val(),
+                transac_person: $('input[name="transac_person"]').val(),
+                reference_no: $('input[name="reference_no"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif14').html(data).css('display','block');
+            }
+        })
+    })
+
+    //-------------------------------------------- Defective section -----------------------
+        //---This is for defective form
+    $(document).on('submit', '#post_form16', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_defective',
+            data: {
+                defect_date: $('input[name="defect_date"]').val(),
+                item: $('input[name="item"]').val(),
+                issue: $('input[name="issue"]').val(),
+                category: $('input[name="category"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif16').html(data).css('display','block');
+            }
+        })
+    })
+
+    //-------------------------------------------- supplier section -----------------------
+        //---This is for supplier form
+    $(document).on('submit', '#post_form17', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'Dashboardinsert_supplier',
+            data: {
+                supply_date: $('input[name="supply_date"]').val(),
+                Name: $('input[name="Name"]').val(),
+                Company: $('input[name="Company"]').val(),
+                Email: $('input[name="Email"]').val(),
+                Supp_Item: $('input[name="Supp_Item"]').val(),
+                purchase: $('input[name="purchase"]').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+
+            success: function(data){
+                $('#save_notif17').html(data).css('display','block');
+            }
+        })
+    })
+
+
+</script>
+
+
+
+
+
+
+
+<!-- <script type="text/javascript" src="{% static 'assets/js/bootstrap.js' %}"></script> -->
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script> -->
+
+</html>

@@ -1,0 +1,112 @@
+
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+        <!--Content for dashboard -->        
+                <div class="mt-5">
+                    <div class="row">
+                        <div class="dashboardCards shadow  col-md-3 mb-2">
+                            <a href="{% url 'out_of_stock_result' %}" class="  text-decoration-none text-dark">
+                                <div class="dcardIcon shadow">
+                                    <img class="dIcon2 " src="{% static 'img/sold-out.png' %}" alt="">
+                                </div>
+                                <div class="dcardInfo">
+                                    <span class="dcardInfo2">Out of Stock</span>
+                                    <h5 class="dcardInfo3">{{ out_of_stock }}</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dashboardCards shadow  col-md-3 mb-2">
+                            <a href="{% url 'low_of_stock_result' %}" class="text-decoration-none text-dark">
+                                <div class="dcardIcon2 shadow">
+                                    <img class="dIcon2 " src="{% static 'img/down4.gif' %}" alt="">
+                                </div>
+                                <div class="dcardInfo">
+                                    <span class="dcardInfo2">Low of Stock</span>
+                                    <h5 class="dcardInfo3">{{ low_of_stock }}</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dashboardCards shadow  col-md-3 mb-2">
+                            <a href="{% url 'allitems' %}" class="text-decoration-none text-dark">
+                                <div class="dcardIcon3 shadow">
+                                    <img class="dIcon2" src="{% static 'img/box.png' %}" alt="">
+                                </div>
+                                <div class="dcardInfo">
+                                    <span class="dcardInfo2">All items</span>
+                                    <h5 class="dcardInfo3">{{ all_items }}</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="chart shadow-lg row m-auto mt-5 mb-5" >
+                      <div class="chart1 col-xl-6 col-md-12  ps-5 ">
+                          <canvas id="myChart2"></canvas>
+                      </div>
+                      <div class="chart2 col-xl-6 col-md-12 pe-5 ">
+                          <canvas id="myChart"></canvas>                            
+                      </div>
+                    </div>
+                </div>
+
+
+
+
+<!--Chart JS-->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+  const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      datasets: [{
+        label: 'Sales',
+        data: [1, 19, 3, 5, 2, 3, 1, 5, 9, 11, 1, 12,],
+        backgroundColor:'#1dc407fb ',
+        borderWidth: 2,
+        pointRadius: 5,
+        borderDash: [],
+        pointBackgroundColor: 'green',
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+//   pie chart for items
+  new Chart(ctx2, {
+    type: 'pie',
+    data: {
+      labels: ['Out of Stock', 'Low of Stock', 'Good Products' ],
+      datasets: [{
+        label: '# of Votes',
+        data: [{{ out_of_stock }}, {{ low_of_stock }},{{ remain_product }}],
+        backgroundColor:['#f81515fb','#FFA000','#1dc407fb '],
+        borderWidth: 2
+      }]
+    },
+    options: {
+
+    }
+  });
+  
+
+</script>
+
+
+        <!--end content for dashboard -->
+{% endblock %}

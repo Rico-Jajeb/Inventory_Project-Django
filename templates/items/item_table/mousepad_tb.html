@@ -1,0 +1,213 @@
+{% extends 'MainPage.html'%}
+
+{% load static %}
+
+
+{% block content %}
+
+                      
+                        <!--This is table -->
+                        <div class="mt-5">
+                                <div class="box1 shadow ms-4 me-4  ">
+                                        <div class="box shadow">
+                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                        </div>
+                         
+                                        <div class="list">
+                                                <span class=" ">
+                                                        List of Items in Mousepad
+                                                </span>
+                                        </div>
+                                        <div class="addbtn  justify-content-end">
+                                                <div class="addbtnItem">
+                                                    {% if user.is_superuser %}
+                                                        <span class=""><button class="bg-transparent border-0"  href="" onclick="pop_modal()"><div class="addbtnItem4 mainColor"><b class="h5">+</b> New</div></button></span>
+                                                        <span class=""><a class="text-decoration-none" onclick="return confirm('Are you sure to Delete all?')" href="{% url 'delete_all_mousepad_items' %}"><div class="addbtnItem5 ms-2 p-1 bg-dark mainColor">Delete All</div></a></span>
+                                                        <span class="ps-2"><a class="text-decoration-none" href="{% url 'allitems' %}"><div class="addbtnItem4 bg-primary"><b class="h5">&larr;</b> Back</div></a></span>
+                                                    {% else %}
+                                                        <span class="ps-2"><a class="text-decoration-none" href="{% url 'allitems' %}"><div class="addbtnItem4 bg-primary"><b class="h5">&larr;</b> Back</div></a></span>
+                                                    {% endif %}
+                                                </div>
+                                        </div>
+                                        <div class="box2 ms-3 me-3  mb-1 ">
+                                                <!-- Search form (start) -->
+                                                <div class=" tableContainer ">
+                                                        <form >
+                                                                <input type='text' name='q' placeholder="Search..."  value='{{ request.GET.q }}'>
+                                                                <input type='submit' name='submit' value='search'>
+                                                        </form>
+                                                        
+
+                                                        <div style="overflow-x: auto;">
+                                                        <table  class="table text-dark table-hover text-center"  >
+                                                        <thead class="border-bottom ">
+                                                                <tr>
+                                                                    {% if user.is_superuser %}
+                                                                        <th scope="col">Name/Model</th>
+                                                                        <th scope="col">Brand</th>
+                                                                        <th scope="col">Description</th>
+                                                                        <th scope="col">Quantity</th>
+                                                                        <th scope="col">price</th>
+                                                                        <th scope="col">Action</th>
+                                                                    {% else %}
+                                                                        <th scope="col">Name/Model</th>
+                                                                        <th scope="col">Brand</th>
+                                                                        <th scope="col">Description</th>
+                                                                        <th scope="col">Quantity</th>
+                                                                        <th scope="col">price</th>
+                                                                    {% endif %}
+                                                                </tr>
+                                                        </thead>
+
+                                                            {% for item in item_paginate %}
+                                                                <tr>
+                                                                    <td>{{ item.name_model }}</td>
+                                                                    <td>{{ item.brand }}</td>
+                                                                    <td >{{ item.descriptin }}</td>
+                                                                    <td>{{ item.quantity }}</td>
+                                                                    <td>{{ item.price }}</td>
+                                                                    {% if user.is_superuser %}
+                                                                        <td class="d-flex justify-content-center">
+                                                                            
+                                                                            <span>
+                                                                                <a class="bg-transparent border-0" href="{% url 'update_mousepad_items' item.id %}" >
+                                                                                    <div class="edit_container">
+                                                                                        <img class='edit_icon ' src="{% static 'img/edit.gif' %}" alt=''>
+                                                                                    </div>
+                                                                                    
+                                                                                </a>
+                                                                            </span>
+                                                                            <span>
+                                                                                <a   href="{% url 'delete_mousepad_items' item.id %}"   onclick="return confirm('Do you want to continue Delete?')">
+                                                                                    <div class="edit_container">
+                                                                                        <img class='edit_icon2 ' src="{% static 'img/delete.gif' %}" alt=''>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </span>
+                                                                    
+                                                                        </td>
+                                                                    {% else %}
+                                                                    {% endif %}
+                                                                </tr>
+                                                              
+                                                            {% endfor %}
+
+
+
+                                                        </table>
+                                                        </div>
+
+                                                        <!-- Paginate -->
+                                                        <div class="">
+                                                        
+                                                        
+                                                            <ul class="pagination">
+
+                                                                {% if item_paginate.has_previous %}
+                                                                    <li class="page-item" >
+                                                                        <a class="page-link" href="?page=1">&laquo First </a>
+                                                                    </li>
+                                                                    <li class="page-item" >
+                                                                        <a class="page-link" href="?page={{item_paginate.previous_page_number}}">previous</a>
+                                                                    </li>
+                                                                        
+                                                               
+                                                                {% endif %}
+                                                                    <li  class="page-item">
+                                                                       <a class="page-link" href="{% url 'mousepad_table' %}">
+                                                                            Page {{ item_paginate.number }} of {{ item_paginate.paginator.num_pages }}
+                                                                       </a>  
+                                                                    </li>
+                                                              
+                                                                
+                                                                {% if item_paginate.has_next %}
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="?page={{ item_paginate.next_page_number }}"> next</a>
+                                                                    </li>
+                                                                   <li class="page-item">
+                                                                        <a class="page-link" href="?page={{ item_paginate.paginator.num_pages }}"> Last &raquo</a>
+                                                                   </li>
+                                                                   
+                                                                {% endif %}
+
+                                                            </ul>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                        <!-- end of table -->
+
+
+                          <!--Item Modal-->
+                          <div class="popup_modal_container" id="modal1">
+                            <div class="popupModal" id="modal2" >
+                                <div class=" modal_form_cont shadow">
+                                    <!--begin-->
+                                        <div class="modal_box shadow">
+                                            <img class="dashboardIcon m-3" src="{% static 'img/boxes2.png' %}" alt="">
+                                        </div>
+                                        <div class="modal_box2 ">
+                                                <a class="modal_close_btn" href="{% url 'mousepad_table' %}" ><img class="closeIcon mt-1" src="{% static 'img/close.gif' %}" alt=""></a>
+                                        </div>
+                                        <div class="save_notif" id="save_notif12">
+
+                                        </div>
+                                        <div class="modal_title">
+                                            
+                                            <span class=" h5">
+                                                    Add Item To Mousepad
+                                                    
+                                            </span>
+                                        </div>
+                                        <div class="  ">
+                                            <form  id="post_form12" class="ms-4 me-4  pb-3 ">
+                                                {% csrf_token %}
+                                              
+                                                <div class="d-flex justify-content-end">
+                                                    <label class="pe-4" for="">Name/Model</label>
+                                                    <input name="name_model12"  type="text" class="itmInput " id="itmInput2 name_model"  required>
+                                                </div>
+                                                <div class="d-flex justify-content-end">
+                                                    <label class="pe-4" for="">Brand</label>
+                                                    <input name="brand12" type="text" class="itmInput" id="itmInput3 brand"   required>
+                                                </div>
+                                                <div class="d-flex justify-content-end">
+                                                    <label class="pe-4" for="">Description</label>
+                                                    <input name="descriptin12" type="text" class="itmInput" id="itmInput4 descriptin"   required>
+                                                </div> 
+                                                <div class="row">
+                                                    <div class="col">                    
+                                                        <label class="pe-2" for="">Qty</label>
+                                                        <input name="quantity12" type="number" class="itmInput"  id="itmInput5 quantity" min="0" max="100000000000" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="pe-2" for="">Price</label>
+                                                        <input name="price12" type="number" class="itmInput "  id="itmInput6 price" min="0" max="100000000000"  required>
+                                                    </div>
+                                                </div>   
+                                                <div class="addMainItmBtn">
+                                                    <div class="btn btn-group">
+                                                        <span><div><input  class="addItmBtn " type="submit" value="save" ></div></span>
+                                                        <span><div ><input class="addItmBtn3 " type="reset" value="reset"></div></span>
+                                                        <span><a class="text-decoration-none" href="{% url 'mousepad_table' %}"><div class="addItmBtn2 bg-primary">view</div></a></span>   
+                                                    </div>
+                                                </div>
+                                            </form>
+                               
+                                        </div>
+                                    <!--end--> 
+                                </div>
+                            </div>
+                        </div>
+                <!-- end item modal-->
+
+
+                
+
+    
+{% endblock %}                   
+
+        
+
+        
